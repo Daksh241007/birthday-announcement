@@ -1,0 +1,83 @@
+/* style.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: url("bg.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 20, 0.75);
+  z-index: -1;
+}
+
+.box {
+  width: 320px;
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+}
+
+h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+}
+
+p, b {
+  line-height: 1.6;
+}
+
+b {
+  font-weight: 500;
+}
+
+input {
+  margin-top: 15px;
+  padding: 10px;
+  width: 90%;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #ff5c8a;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#typeText {
+  white-space: pre-line;
+  font-size: 15.5px;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
