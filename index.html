@@ -1,0 +1,42 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>hey Aadnya 🌙</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="overlay"></div>
+
+  <audio id="bgMusic" src="song.mp3"></audio>
+
+  <div class="box" id="screen1">
+    <h3>hey Aadnya…<br>aaje thodu special chhe 🌙</h3>
+    <button onclick="next()">aagad jaiye?</button>
+  </div>
+
+  <div class="box" id="screen2" style="display:none;">
+    <p>birthday toh chhe hi…<br>pan pehla ek nanu question</p>
+    <b>tu aaje kem chhe?</b>
+    <input type="text" id="mood" placeholder="yaha likh sakti hai…" />
+    <button onclick="reply()">send</button>
+  </div>
+
+  <div class="box" id="screen3" style="display:none;">
+    <p id="typeText"></p>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
