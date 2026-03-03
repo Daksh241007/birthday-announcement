@@ -22,10 +22,21 @@ body {
   z-index: -1;
 }
 
+.moon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
 .box {
   width: 320px;
   text-align: center;
   animation: fadeIn 1.5s ease;
+  animation-delay: 1.5s;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 
 h3 {
@@ -50,7 +61,6 @@ input {
   border-radius: 8px;
   border: none;
   outline: none;
-  font-size: 14px;
 }
 
 button {
@@ -61,7 +71,16 @@ button {
   background: #ff5c8a;
   color: white;
   cursor: pointer;
-  font-size: 14px;
+}
+
+.block {
+  opacity: 0;
+  margin-bottom: 22px;
+  transition: opacity 1.2s ease;
+}
+
+.block.glow {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
 }
 
 #typeText {
