@@ -15,16 +15,16 @@ function reply() {
   music.play();
 
   let v = 0;
-  const fade = setInterval(() => {
+  const fadeMusic = setInterval(() => {
     if (v < 0.4) {
       v += 0.02;
       music.volume = v;
-    } else clearInterval(fade);
+    } else clearInterval(fadeMusic);
   }, 200);
 
   screen2.style.display = "none";
   screen3.style.display = "block";
-  showBlocks();
+  startSequence();
 }
 
 const blocks = [
@@ -37,12 +37,14 @@ const blocks = [
   [
     "jab tu bolti hai",
     "toh cheezein dramatic nahi hoti",
-    "bas thodi shaant ho jaati hai"
+    "bas thodi shaant ho jaati hai",
+    " "
   ],
   [
     "aa shaanti rare chhe Aadnya",
     "ane je rare hoy",
-    "ene lightly levu na joye"
+    "ene lightly levu na joye",
+    " "
   ],
   [
     "shayad tujhe khud bhi nahi pata",
@@ -60,41 +62,82 @@ const blocks = [
 
 let blockIndex = 0;
 
-function showBlocks() {
-  const el = document.getElementById("typeText");
+function startSequence() {
+  if (blockIndex >= blocks.length) {
+    setTimeout(showBirthday, 1200);
+    return;
+  }
 
-  if (blockIndex < blocks.length) {
-    const text = blocks[blockIndex].join("\n");
+  if (blockIndex % 2 === 0) {
+    showFourAtOnce(blocks[blockIndex]);
+  } else {
+    showOneByOne(blocks[blockIndex]);
+  }
+}
+
+function showFourAtOnce(lines) {
+  const el = document.getElementById("typeText");
+  el.innerHTML = "";
+
+  const p = document.createElement("p");
+  p.className = "block";
+  p.innerText = lines.join("\n");
+  el.appendChild(p);
+
+  setTimeout(() => p.classList.add("show"), 100);
+
+  setTimeout(() => {
+    p.classList.add("fade");
+  }, 2600);
+
+  setTimeout(() => {
+    p.remove();
+    blockIndex++;
+    startSequence();
+  }, 3800);
+}
+
+function showOneByOne(lines) {
+  const el = document.getElementById("typeText");
+  el.innerHTML = "";
+
+  let i = 0;
+  const shown = [];
+
+  function revealLine() {
+    if (i >= lines.length) {
+      setTimeout(() => {
+        shown.forEach(b => b.classList.add("fade"));
+        setTimeout(() => {
+          shown.forEach(b => b.remove());
+          blockIndex++;
+          startSequence();
+        }, 1200);
+      }, 2000);
+      return;
+    }
 
     const p = document.createElement("p");
     p.className = "block";
-    p.innerText = text;
-
+    p.innerText = lines[i];
     el.appendChild(p);
+    shown.push(p);
 
-    setTimeout(() => {
-      p.style.opacity = 1;
-      p.classList.add("glow");
-      spawnStar();
+    setTimeout(() => p.classList.add("show"), 50);
 
-      setTimeout(() => {
-        p.classList.remove("glow");
-      }, 1200);
-    }, 100);
-
-    blockIndex++;
-    setTimeout(showBlocks, 2600);
-  } else {
-    setTimeout(showBirthday, 2000);
+    i++;
+    setTimeout(revealLine, 700);
   }
+
+  revealLine();
 }
 
 function showBirthday() {
   const el = document.getElementById("typeText");
+  el.innerHTML = "";
 
   const final = document.createElement("p");
   final.className = "block";
-  final.style.marginTop = "30px";
   final.innerText =
     "happy birthday Aadnya 🌙\n\n" +
     "aa year tane thodu zyada shaant mile\n" +
@@ -105,32 +148,9 @@ function showBirthday() {
   el.appendChild(final);
 
   setTimeout(() => {
-    final.style.opacity = 1;
-    final.classList.add("glow");
+    final.classList.add("show");
     startConfetti();
   }, 300);
-}
-
-function spawnStar() {
-  const star = document.createElement("div");
-  star.innerText = "✦";
-  star.style.position = "fixed";
-  star.style.left = Math.random() * window.innerWidth + "px";
-  star.style.top = "-20px";
-  star.style.opacity = "0.6";
-  star.style.fontSize = "12px";
-  star.style.transition = "top 2.5s linear, opacity 2.5s";
-
-  document.body.appendChild(star);
-
-  setTimeout(() => {
-    star.style.top = window.innerHeight + "px";
-    star.style.opacity = "0";
-  }, 50);
-
-  setTimeout(() => {
-    star.remove();
-  }, 2600);
 }
 
 function startConfetti() {
